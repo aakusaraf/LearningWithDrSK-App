@@ -1,0 +1,15 @@
+{
+  "resourceName": "mylearningstorage",
+  "policyUUID": "6e7943c7",
+  "bucketName": "mylearningbucket",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "S3Trigger826b94f7",
+  "groupAccess": {}
+}

@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "LearningwithDrSK",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authlearningwithdrskae20dc05",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2022-09-22T12:44:31.917Z"
+}
