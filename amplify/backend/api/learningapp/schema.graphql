@@ -1,0 +1,41 @@
+type CourseDetail @model @auth(rules: [{allow: public}, {allow: owner}, {allow: private}]) {
+  id: ID!
+  courseName: String
+  description: String
+  rating: Float
+  outline: String
+  icon: String
+  VideosCoursedetail: [Videos] @hasMany(indexName: "byCourseDetail", fields: ["id"])
+  categoriesID: ID! @index(name: "byCategories")
+}
+
+type Banner @model @auth(rules: [{allow: public}, {allow: private}, {allow: owner}]) {
+  id: ID!
+  bannerName: String!
+  image: String!
+}
+
+type Videos @model @auth(rules: [{allow: public}, {allow: private}, {allow: owner}]) {
+  id: ID!
+  videoName: String
+  coursedetailID: ID! @index(name: "byCourseDetail")
+  videoUrl: String
+  videoImage: String
+}
+
+type Categories @model @auth(rules: [{allow: public}, {allow: owner}, {allow: private}]) {
+  id: ID!
+  categoryName: String
+  description: String
+  icon: String
+  CategoriesCourseDetails: [CourseDetail] @hasMany(indexName: "byCategories", fields: ["id"])
+}
+
+type Users @model @auth(rules: [{allow: owner}, {allow: private}, {allow: public}]) {
+  id: ID!
+  userName: String!
+  email: AWSEmail
+  mobile: String
+  image: String
+}
+ 

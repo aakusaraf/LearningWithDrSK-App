@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "learningwithdrskae20dc05_identitypool_ae20dc05",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "learniae20dc05",
-    "userPoolName": "learningwithdrskae20dc05_userpool_ae20dc05",
+    "identityPoolName": "learningapp15bdda75_identitypool_15bdda75",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "learni15bdda75",
+    "userPoolName": "learningapp15bdda75_userpool_15bdda75",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -20,7 +20,9 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email"
+      "email",
+      "name",
+      "phone_number"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
@@ -31,29 +33,19 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "learniae20dc05_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "learni15bdda75_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "ae20dc05",
-    "resourceName": "learningwithdrskae20dc05",
+    "sharedId": "15bdda75",
+    "resourceName": "learningapp15bdda75",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
+    "usernameAttributes": [
+      "email, phone_number"
+    ],
+    "triggers": {},
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": []
+    "useEnabledMfas": true
   }
 }

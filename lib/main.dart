@@ -4,12 +4,13 @@ import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:learning/home.dart';
-import 'package:learning/profile.dart';
+// import 'package:learning/home.dart';
+// import 'package:learning/profile.dart';
 import 'package:learning/userProfile.dart';
-
+// import 'package:path/path.dart';
 import 'amplifyconfiguration.dart';
 import 'models/ModelProvider.dart';
+
 
 void main() {
   runApp( const MyApp());
@@ -35,12 +36,11 @@ class _MyAppState extends State<MyApp> {
   void _configureAmplify() async {
     try {
       await Amplify.addPlugin(AmplifyAuthCognito());
-      await Amplify.addPlugin(AmplifyAPI(        modelProvider: ModelProvider.instance,
-      ));
+      await Amplify.addPlugin(AmplifyAPI(modelProvider: ModelProvider.instance));
       datastorePlugin = AmplifyDataStore(
         modelProvider: ModelProvider.instance,
         errorHandler: ((error) =>
-        {print("Custom ErrorHandler received: " + error.toString())}),
+        {print("Custom ErrorHandler received: $error")}),
       );
       await Amplify.addPlugin(datastorePlugin);
 
@@ -68,10 +68,50 @@ class MyMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(MyApp.appTitle)),
-        body: const Center(
-          child: Text('Home Page!'),
+        appBar: AppBar(title: const Text(MyApp.appTitle)),
+        // horizontal scroll listView
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 100,
+                child: ListView.builder(
+                    itemExtent: 150,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => Container(
+                      margin: const EdgeInsets.all(5.0),
+                      color: Colors.blue,
+                        alignment: Alignment.center,
+                        child: Text('List item $index'),
+                    ),
+                    itemCount: 20),
+              ),
+            ),
+
+            // vertical scroll gridView
+            SliverGrid(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200.0,
+                mainAxisExtent: 200.0,
+                childAspectRatio: 4.0,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                  return Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    color: Colors.teal,
+                    child: Text('grid item $index'),
+                  );
+                },
+                childCount: 25,
+              ),
+            )
+          ],
         ),
+
+
+        // User profile Drawer
         drawer:Drawer(
           child: ListView(
             // Important: Remove any padding from the ListView.
@@ -109,7 +149,7 @@ class MyMaterialApp extends StatelessWidget {
                 title: const Text('Profile'),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyUserProfileApp()));
+                      MaterialPageRoute(builder: (context) => const MyUserProfileApp()));
                 },
               ),
               ListTile(
@@ -132,21 +172,27 @@ class MyMaterialApp extends StatelessWidget {
                 },
               ),
 
-
               const AboutListTile( // <-- SEE HERE
                 icon: Icon(
                   Icons.info,
                 ),
-                child: Text('App Info'),
                 applicationIcon: Icon(
                   Icons.local_play,
                 ),
-                applicationName: 'Learing with Dr.SK Srivastava',
+                applicationName: 'Learning with Dr.SK Srivastava',
                 applicationVersion: '1.0.0',
+                child: Text('App Info'),
               ),
             ],
           ),
         )
     );
   }
+  Widget buildCard(int index) =>Container(
+    color: Colors.blue,
+    width: 280,
+    height: 150,
+    child: Center(child: Text('$index'),),
+  );
+
 }

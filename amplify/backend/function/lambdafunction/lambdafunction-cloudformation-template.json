@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.0.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -16,21 +16,25 @@
     "s3Key": {
       "Type": "String"
     },
-    "apiLearningwithDrSKGraphQLAPIIdOutput": {
+    "apilearningappGraphQLAPIIdOutput": {
       "Type": "String",
-      "Default": "apiLearningwithDrSKGraphQLAPIIdOutput"
+      "Default": "apilearningappGraphQLAPIIdOutput"
     },
-    "apiLearningwithDrSKGraphQLAPIEndpointOutput": {
+    "apilearningappGraphQLAPIEndpointOutput": {
       "Type": "String",
-      "Default": "apiLearningwithDrSKGraphQLAPIEndpointOutput"
+      "Default": "apilearningappGraphQLAPIEndpointOutput"
     },
-    "apiLearningwithDrSKGraphQLAPIKeyOutput": {
+    "authlearningapp15bdda75UserPoolId": {
       "Type": "String",
-      "Default": "apiLearningwithDrSKGraphQLAPIKeyOutput"
+      "Default": "authlearningapp15bdda75UserPoolId"
     },
-    "authlearningwithdrskae20dc05UserPoolId": {
+    "apilearningappGraphQLAPIKeyOutput": {
       "Type": "String",
-      "Default": "authlearningwithdrskae20dc05UserPoolId"
+      "Default": "apilearningappGraphQLAPIKeyOutput"
+    },
+    "storages3learningappstoragebad1b9edBucketName": {
+      "Type": "String",
+      "Default": "storages3learningappstoragebad1b9edBucketName"
     }
   },
   "Conditions": {
@@ -63,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "lamdafunction",
+            "lambdafunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "lamdafunction",
+                  "lambdafunction",
                   "-",
                   {
                     "Ref": "env"
@@ -86,24 +90,27 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_LEARNINGWITHDRSK_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apiLearningwithDrSKGraphQLAPIIdOutput"
+            "AUTH_LEARNINGAPP15BDDA75_USERPOOLID": {
+              "Ref": "authlearningapp15bdda75UserPoolId"
             },
-            "API_LEARNINGWITHDRSK_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apiLearningwithDrSKGraphQLAPIEndpointOutput"
+            "API_LEARNINGAPP_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apilearningappGraphQLAPIIdOutput"
             },
-            "API_LEARNINGWITHDRSK_GRAPHQLAPIKEYOUTPUT": {
-              "Ref": "apiLearningwithDrSKGraphQLAPIKeyOutput"
+            "API_LEARNINGAPP_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apilearningappGraphQLAPIEndpointOutput"
             },
-            "AUTH_LEARNINGWITHDRSKAE20DC05_USERPOOLID": {
-              "Ref": "authlearningwithdrskae20dc05UserPoolId"
+            "API_LEARNINGAPP_GRAPHQLAPIKEYOUTPUT": {
+              "Ref": "apilearningappGraphQLAPIKeyOutput"
             },
-            "API_LEARNINGWITHDRSK_COURSEDETAILTABLE_NAME": {
+            "STORAGE_S3LEARNINGAPPSTORAGEBAD1B9ED_BUCKETNAME": {
+              "Ref": "storages3learningappstoragebad1b9edBucketName"
+            },
+            "API_LEARNINGAPP_COURSEDETAILTABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
+                "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
               }
             },
-            "API_LEARNINGWITHDRSK_COURSEDETAILTABLE_ARN": {
+            "API_LEARNINGAPP_COURSEDETAILTABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -118,18 +125,18 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
+                      "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
                     }
                   }
                 ]
               ]
             },
-            "API_LEARNINGWITHDRSK_BANNERTABLE_NAME": {
+            "API_LEARNINGAPP_BANNERTABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
+                "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
               }
             },
-            "API_LEARNINGWITHDRSK_BANNERTABLE_ARN": {
+            "API_LEARNINGAPP_BANNERTABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -144,18 +151,18 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
+                      "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
                     }
                   }
                 ]
               ]
             },
-            "API_LEARNINGWITHDRSK_VIDEOSTABLE_NAME": {
+            "API_LEARNINGAPP_VIDEOSTABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
+                "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
               }
             },
-            "API_LEARNINGWITHDRSK_VIDEOSTABLE_ARN": {
+            "API_LEARNINGAPP_VIDEOSTABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -170,18 +177,18 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
+                      "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
                     }
                   }
                 ]
               ]
             },
-            "API_LEARNINGWITHDRSK_CATEGORIESTABLE_NAME": {
+            "API_LEARNINGAPP_CATEGORIESTABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
+                "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
               }
             },
-            "API_LEARNINGWITHDRSK_CATEGORIESTABLE_ARN": {
+            "API_LEARNINGAPP_CATEGORIESTABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -196,18 +203,18 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
+                      "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
                     }
                   }
                 ]
               ]
             },
-            "API_LEARNINGWITHDRSK_USERSTABLE_NAME": {
+            "API_LEARNINGAPP_USERSTABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
+                "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
               }
             },
-            "API_LEARNINGWITHDRSK_USERSTABLE_ARN": {
+            "API_LEARNINGAPP_USERSTABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -222,7 +229,7 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
+                      "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
                     }
                   }
                 ]
@@ -247,12 +254,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "learningwithdrskLambdaRole27efb8d8",
+            "learningappLambdaRole37af1ba1",
             {
               "Fn::Join": [
                 "",
                 [
-                  "learningwithdrskLambdaRole27efb8d8",
+                  "learningappLambdaRole37af1ba1",
                   "-",
                   {
                     "Ref": "env"
@@ -338,74 +345,6 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "appsync:GraphQL"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apiLearningwithDrSKGraphQLAPIIdOutput"
-                      },
-                      "/types/Query/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apiLearningwithDrSKGraphQLAPIIdOutput"
-                      },
-                      "/types/Mutation/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apiLearningwithDrSKGraphQLAPIIdOutput"
-                      },
-                      "/types/Subscription/*"
-                    ]
-                  ]
-                }
-              ]
-            },
             {
               "Effect": "Allow",
               "Action": [
@@ -506,8 +445,115 @@
                       },
                       ":userpool/",
                       {
-                        "Ref": "authlearningwithdrskae20dc05UserPoolId"
+                        "Ref": "authlearningapp15bdda75UserPoolId"
                       }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "appsync:GraphQL"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apilearningappGraphQLAPIIdOutput"
+                      },
+                      "/types/Query/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apilearningappGraphQLAPIIdOutput"
+                      },
+                      "/types/Mutation/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apilearningappGraphQLAPIIdOutput"
+                      },
+                      "/types/Subscription/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storages3learningappstoragebad1b9edBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storages3learningappstoragebad1b9edBucketName"
+                      },
+                      "/*"
                     ]
                   ]
                 }
@@ -545,7 +591,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
                         }
                       }
                     ]
@@ -566,7 +612,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:Name"
                         }
                       },
                       "/index/*"
@@ -607,7 +653,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
                         }
                       }
                     ]
@@ -628,7 +674,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:BannerTable:Name"
                         }
                       },
                       "/index/*"
@@ -669,7 +715,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
                         }
                       }
                     ]
@@ -690,7 +736,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:VideosTable:Name"
                         }
                       },
                       "/index/*"
@@ -731,7 +777,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
                         }
                       }
                     ]
@@ -752,7 +798,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CategoriesTable:Name"
                         }
                       },
                       "/index/*"
@@ -793,7 +839,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
                         }
                       }
                     ]
@@ -814,7 +860,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
+                          "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:UsersTable:Name"
                         }
                       },
                       "/index/*"
@@ -852,7 +898,7 @@
               ],
               "Resource": {
                 "Fn::ImportValue": {
-                  "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:StreamArn"
+                  "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:StreamArn"
                 }
               }
             }
@@ -871,7 +917,7 @@
         "Enabled": true,
         "EventSourceArn": {
           "Fn::ImportValue": {
-            "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:StreamArn"
+            "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CourseDetailTable:StreamArn"
           }
         },
         "FunctionName": {
@@ -908,7 +954,7 @@
               ],
               "Resource": {
                 "Fn::ImportValue": {
-                  "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:BannerTable:StreamArn"
+                  "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:BannerTable:StreamArn"
                 }
               }
             }
@@ -927,7 +973,7 @@
         "Enabled": true,
         "EventSourceArn": {
           "Fn::ImportValue": {
-            "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:BannerTable:StreamArn"
+            "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:BannerTable:StreamArn"
           }
         },
         "FunctionName": {
@@ -964,7 +1010,7 @@
               ],
               "Resource": {
                 "Fn::ImportValue": {
-                  "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:VideosTable:StreamArn"
+                  "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:VideosTable:StreamArn"
                 }
               }
             }
@@ -983,7 +1029,7 @@
         "Enabled": true,
         "EventSourceArn": {
           "Fn::ImportValue": {
-            "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:VideosTable:StreamArn"
+            "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:VideosTable:StreamArn"
           }
         },
         "FunctionName": {
@@ -1020,7 +1066,7 @@
               ],
               "Resource": {
                 "Fn::ImportValue": {
-                  "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CategoriesTable:StreamArn"
+                  "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CategoriesTable:StreamArn"
                 }
               }
             }
@@ -1039,7 +1085,7 @@
         "Enabled": true,
         "EventSourceArn": {
           "Fn::ImportValue": {
-            "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:CategoriesTable:StreamArn"
+            "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:CategoriesTable:StreamArn"
           }
         },
         "FunctionName": {
@@ -1076,7 +1122,7 @@
               ],
               "Resource": {
                 "Fn::ImportValue": {
-                  "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:UsersTable:StreamArn"
+                  "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:UsersTable:StreamArn"
                 }
               }
             }
@@ -1095,7 +1141,7 @@
         "Enabled": true,
         "EventSourceArn": {
           "Fn::ImportValue": {
-            "Fn::Sub": "${apiLearningwithDrSKGraphQLAPIIdOutput}:GetAtt:UsersTable:StreamArn"
+            "Fn::Sub": "${apilearningappGraphQLAPIIdOutput}:GetAtt:UsersTable:StreamArn"
           }
         },
         "FunctionName": {

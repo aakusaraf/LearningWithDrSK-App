@@ -1,35 +1,31 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-learningwithdrsk-staging-105331-authRole",
-      "UnauthRoleArn": "arn:aws:iam::079286488318:role/amplify-learningwithdrsk-staging-105331-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::079286488318:role/amplify-learningwithdrsk-staging-105331-authRole",
+      "AuthRoleName": "amplify-learningapp-staging-135139-authRole",
+      "UnauthRoleArn": "arn:aws:iam::079286488318:role/amplify-learningapp-staging-135139-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::079286488318:role/amplify-learningapp-staging-135139-authRole",
       "Region": "ap-south-1",
-      "DeploymentBucketName": "amplify-learningwithdrsk-staging-105331-deployment",
-      "UnauthRoleName": "amplify-learningwithdrsk-staging-105331-unauthRole",
-      "StackName": "amplify-learningwithdrsk-staging-105331",
-      "StackId": "arn:aws:cloudformation:ap-south-1:079286488318:stack/amplify-learningwithdrsk-staging-105331/d5848c10-1e1a-11ed-ae7e-0abb9bb1acc8",
-      "AmplifyAppId": "d2dudhrgi5lcuu"
+      "DeploymentBucketName": "amplify-learningapp-staging-135139-deployment",
+      "UnauthRoleName": "amplify-learningapp-staging-135139-unauthRole",
+      "StackName": "amplify-learningapp-staging-135139",
+      "StackId": "arn:aws:cloudformation:ap-south-1:079286488318:stack/amplify-learningapp-staging-135139/0f7bfbb0-4ad0-11ed-92a5-02c99d28cf96",
+      "AmplifyAppId": "d17gxivzegvntr"
     },
     "categories": {
       "auth": {
-        "learningwithdrskae20dc05": {}
+        "learningapp15bdda75": {}
+      },
+      "storage": {
+        "s3learningappstoragebad1b9ed": {}
       },
       "function": {
-        "lamdafunction": {
-          "deploymentBucketName": "amplify-learningwithdrsk-staging-105331-deployment",
-          "s3Key": "amplify-builds/lamdafunction-4f644c4b682f6367674d-build.zip"
+        "lambdafunction": {
+          "deploymentBucketName": "amplify-learningapp-staging-135139-deployment",
+          "s3Key": "amplify-builds/lambdafunction-4849776e576b564a4d76-build.zip"
         },
-        "S3Triggera3baada2": {
-          "deploymentBucketName": "amplify-learningwithdrsk-staging-105331-deployment",
-          "s3Key": "amplify-builds/S3Triggera3baada2-6972496e5034664d674d-build.zip"
-        },
-        "S3Trigger826b94f7": {
-          "deploymentBucketName": "amplify-learningwithdrsk-staging-105331-deployment",
-          "s3Key": "amplify-builds/S3Trigger826b94f7-4832576a573470667265-build.zip"
-        },
-        "learningwithdrskae20dc05PostConfirmation": {
-          "GROUP": "Users "
+        "learningapp3943e2fd": {
+          "deploymentBucketName": "amplify-learningapp-staging-135139-deployment",
+          "s3Key": "amplify-builds/learningapp3943e2fd-7237495677446c4c7978-build.zip"
         }
       }
     }

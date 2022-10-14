@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "LearningwithDrSK",
+  "projectName": "learningApp",
   "version": "3.1",
   "frontend": "flutter",
   "flutter": {

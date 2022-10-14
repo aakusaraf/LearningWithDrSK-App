@@ -1,53 +1,20 @@
 {
-  "api": {
-    "LearningwithDrSK": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "learningwithdrskae20dc05",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ],
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authlearningwithdrskae20dc05"
-            }
-          },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            },
-            {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 7,
-                "apiKeyExpirationDate": "2022-09-29T11:57:20.413Z",
-                "description": "apiKeyLearning"
-              }
-            }
-          ]
-        }
-      }
-    }
-  },
   "auth": {
-    "learningwithdrskae20dc05": {
+    "learningapp15bdda75": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "NAME",
+          "PHONE_NUMBER"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -63,23 +30,74 @@
       }
     }
   },
+  "api": {
+    "learningapp": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "learningapp15bdda75",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authlearningapp15bdda75"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            },
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 30,
+                "description": "api key description"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "storage": {
+    "s3learningappstoragebad1b9ed": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
+  },
   "function": {
-    "lamdafunction": {
+    "lambdafunction": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
         {
           "category": "api",
-          "resourceName": "LearningwithDrSK",
+          "resourceName": "learningapp",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
           ]
         },
         {
+          "category": "auth",
+          "resourceName": "learningapp15bdda75",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
           "category": "api",
-          "resourceName": "LearningwithDrSK",
+          "resourceName": "learningapp",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
@@ -87,37 +105,25 @@
           ]
         },
         {
-          "category": "auth",
-          "resourceName": "learningwithdrskae20dc05",
+          "category": "storage",
+          "resourceName": "s3learningappstoragebad1b9ed",
           "attributes": [
-            "UserPoolId"
+            "BucketName"
           ]
         }
       ]
     },
-    "S3Triggera3baada2": {
+    "learningapp3943e2fd": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "providerPlugin": "awscloudformation",
-      "build": true
-    },
-    "S3Trigger826b94f7": {
-      "service": "Lambda",
-      "providerPlugin": "awscloudformation",
-      "build": true
-    }
-  },
-  "storage": {
-    "mylearningstorage": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "S3Trigger826b94f7",
+          "category": "api",
+          "resourceName": "learningapp",
           "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
           ]
         }
       ]

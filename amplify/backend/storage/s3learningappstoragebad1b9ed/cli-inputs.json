@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3learningappstoragebad1b9ed",
+  "bucketName": "learningapp-storage-bad1b9ed",
+  "policyUUID": "80951f87",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

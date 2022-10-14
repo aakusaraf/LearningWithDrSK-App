@@ -30,6 +30,8 @@ class Users extends Model {
   final String id;
   final String? _userName;
   final String? _email;
+  final String? _mobile;
+  final String? _image;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -41,12 +43,29 @@ class Users extends Model {
     return id;
   }
   
-  String? get userName {
-    return _userName;
+  String get userName {
+    try {
+      return _userName!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   String? get email {
     return _email;
+  }
+  
+  String? get mobile {
+    return _mobile;
+  }
+  
+  String? get image {
+    return _image;
   }
   
   TemporalDateTime? get createdAt {
@@ -57,13 +76,15 @@ class Users extends Model {
     return _updatedAt;
   }
   
-  const Users._internal({required this.id, userName, email, createdAt, updatedAt}): _userName = userName, _email = email, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Users._internal({required this.id, required userName, email, mobile, image, createdAt, updatedAt}): _userName = userName, _email = email, _mobile = mobile, _image = image, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Users({String? id, String? userName, String? email}) {
+  factory Users({String? id, required String userName, String? email, String? mobile, String? image}) {
     return Users._internal(
       id: id == null ? UUID.getUUID() : id,
       userName: userName,
-      email: email);
+      email: email,
+      mobile: mobile,
+      image: image);
   }
   
   bool equals(Object other) {
@@ -76,7 +97,9 @@ class Users extends Model {
     return other is Users &&
       id == other.id &&
       _userName == other._userName &&
-      _email == other._email;
+      _email == other._email &&
+      _mobile == other._mobile &&
+      _image == other._image;
   }
   
   @override
@@ -90,6 +113,8 @@ class Users extends Model {
     buffer.write("id=" + "$id" + ", ");
     buffer.write("userName=" + "$_userName" + ", ");
     buffer.write("email=" + "$_email" + ", ");
+    buffer.write("mobile=" + "$_mobile" + ", ");
+    buffer.write("image=" + "$_image" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -97,32 +122,57 @@ class Users extends Model {
     return buffer.toString();
   }
   
-  Users copyWith({String? id, String? userName, String? email}) {
+  Users copyWith({String? id, String? userName, String? email, String? mobile, String? image}) {
     return Users._internal(
       id: id ?? this.id,
       userName: userName ?? this.userName,
-      email: email ?? this.email);
+      email: email ?? this.email,
+      mobile: mobile ?? this.mobile,
+      image: image ?? this.image);
   }
   
   Users.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _userName = json['userName'],
       _email = json['email'],
+      _mobile = json['mobile'],
+      _image = json['image'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'userName': _userName, 'email': _email, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'userName': _userName, 'email': _email, 'mobile': _mobile, 'image': _image, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField USERNAME = QueryField(fieldName: "userName");
   static final QueryField EMAIL = QueryField(fieldName: "email");
+  static final QueryField MOBILE = QueryField(fieldName: "mobile");
+  static final QueryField IMAGE = QueryField(fieldName: "image");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Users";
     modelSchemaDefinition.pluralName = "Users";
     
     modelSchemaDefinition.authRules = [
+      AuthRule(
+        authStrategy: AuthStrategy.OWNER,
+        ownerField: "owner",
+        identityClaim: "cognito:username",
+        provider: AuthRuleProvider.USERPOOLS,
+        operations: [
+          ModelOperation.CREATE,
+          ModelOperation.UPDATE,
+          ModelOperation.DELETE,
+          ModelOperation.READ
+        ]),
+      AuthRule(
+        authStrategy: AuthStrategy.PRIVATE,
+        operations: [
+          ModelOperation.CREATE,
+          ModelOperation.UPDATE,
+          ModelOperation.DELETE,
+          ModelOperation.READ
+        ]),
       AuthRule(
         authStrategy: AuthStrategy.PUBLIC,
         operations: [
@@ -137,12 +187,24 @@ class Users extends Model {
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Users.USERNAME,
-      isRequired: false,
+      isRequired: true,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Users.EMAIL,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Users.MOBILE,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Users.IMAGE,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));

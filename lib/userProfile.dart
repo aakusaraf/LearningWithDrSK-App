@@ -1,9 +1,10 @@
 import 'package:amplify_api/model_queries.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:learning/main.dart';
 import 'package:learning/home.dart';
-import 'dart:io';
-import 'package:graphql_flutter/graphql_flutter.dart';
+// import 'dart:io';
+// import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:learning/models/Users.dart';
 import 'package:learning/profile.dart';
 
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyUserProfileApp> {
               onPressed: () {
                 //statements
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MyDemoApp()));
+                    MaterialPageRoute(builder: (context) => const MyApp()));
               },
             ),
             title: const Center(child: Text('User Profile ')),
@@ -52,8 +53,28 @@ class _MyAppState extends State<MyUserProfileApp> {
           body: FutureBuilder<Users?>(
             future: queryItem(),
             builder: (context, snapshot) {
+              final name = snapshot.data?.userName;
+              final email= snapshot.data?.email;
+              final mobile= snapshot.data?.mobile;
               if(snapshot.hasData) {
-                return Container();
+                return Card(
+                    child: Center(
+                      child: Text(
+                      '$name  $email  $mobile',
+                      // '$email',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    )
+                );
+
+              //     Container(
+              //   child: Center(
+              //   child: Text(
+              //   '$data',
+              //   style: TextStyle(fontSize: 18),
+              // ),
+              // )
+              //   );
 
               } else {
                 return const CircularProgressIndicator();
@@ -72,14 +93,14 @@ class _MyAppState extends State<MyUserProfileApp> {
   Future<Users?> queryItem() async {
     try {
       final user = await getCurrentUser();
-      print("Cognito USer Info$user");
-      print("Cognito USer Info${user.userId}");
-      print("Cognito USer Info${user.username}");
+      print("Cognito USer Info $user");
+      print("Cognito USer ID: ${user.userId}");
+      print("Cognito USer Name: ${user.username}");
 
       final request = ModelQueries.get(Users.classType, user.userId);
       final response = await Amplify.API.query(request: request).response;
       final users = response.data;
-      print("User Info$response");
+      print("User response $response");
       if (users == null) {
         print('errors: ${response.errors}');
       }

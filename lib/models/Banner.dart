@@ -29,6 +29,7 @@ class Banner extends Model {
   static const classType = const _BannerModelType();
   final String id;
   final String? _bannerName;
+  final String? _image;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -40,8 +41,30 @@ class Banner extends Model {
     return id;
   }
   
-  String? get bannerName {
-    return _bannerName;
+  String get bannerName {
+    try {
+      return _bannerName!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  String get image {
+    try {
+      return _image!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   TemporalDateTime? get createdAt {
@@ -52,12 +75,13 @@ class Banner extends Model {
     return _updatedAt;
   }
   
-  const Banner._internal({required this.id, bannerName, createdAt, updatedAt}): _bannerName = bannerName, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Banner._internal({required this.id, required bannerName, required image, createdAt, updatedAt}): _bannerName = bannerName, _image = image, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Banner({String? id, String? bannerName}) {
+  factory Banner({String? id, required String bannerName, required String image}) {
     return Banner._internal(
       id: id == null ? UUID.getUUID() : id,
-      bannerName: bannerName);
+      bannerName: bannerName,
+      image: image);
   }
   
   bool equals(Object other) {
@@ -69,7 +93,8 @@ class Banner extends Model {
     if (identical(other, this)) return true;
     return other is Banner &&
       id == other.id &&
-      _bannerName == other._bannerName;
+      _bannerName == other._bannerName &&
+      _image == other._image;
   }
   
   @override
@@ -82,6 +107,7 @@ class Banner extends Model {
     buffer.write("Banner {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("bannerName=" + "$_bannerName" + ", ");
+    buffer.write("image=" + "$_image" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -89,24 +115,27 @@ class Banner extends Model {
     return buffer.toString();
   }
   
-  Banner copyWith({String? id, String? bannerName}) {
+  Banner copyWith({String? id, String? bannerName, String? image}) {
     return Banner._internal(
       id: id ?? this.id,
-      bannerName: bannerName ?? this.bannerName);
+      bannerName: bannerName ?? this.bannerName,
+      image: image ?? this.image);
   }
   
   Banner.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _bannerName = json['bannerName'],
+      _image = json['image'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'bannerName': _bannerName, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'bannerName': _bannerName, 'image': _image, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField BANNERNAME = QueryField(fieldName: "bannerName");
+  static final QueryField IMAGE = QueryField(fieldName: "image");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Banner";
     modelSchemaDefinition.pluralName = "Banners";
@@ -119,6 +148,25 @@ class Banner extends Model {
           ModelOperation.UPDATE,
           ModelOperation.DELETE,
           ModelOperation.READ
+        ]),
+      AuthRule(
+        authStrategy: AuthStrategy.PRIVATE,
+        operations: [
+          ModelOperation.CREATE,
+          ModelOperation.UPDATE,
+          ModelOperation.DELETE,
+          ModelOperation.READ
+        ]),
+      AuthRule(
+        authStrategy: AuthStrategy.OWNER,
+        ownerField: "owner",
+        identityClaim: "cognito:username",
+        provider: AuthRuleProvider.USERPOOLS,
+        operations: [
+          ModelOperation.CREATE,
+          ModelOperation.UPDATE,
+          ModelOperation.DELETE,
+          ModelOperation.READ
         ])
     ];
     
@@ -126,7 +174,13 @@ class Banner extends Model {
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Banner.BANNERNAME,
-      isRequired: false,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Banner.IMAGE,
+      isRequired: true,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     

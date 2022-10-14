@@ -1,11 +1,11 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "LearningwithDrSK",
+    "apiName": "learningapp",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authlearningwithdrskae20dc05"
+      "cognitoUserPoolId": "authlearningapp15bdda75"
     },
     "additionalAuthTypes": [
       {
@@ -13,9 +13,8 @@
       },
       {
         "mode": "API_KEY",
-        "expirationTime": 7,
-        "apiKeyExpirationDate": "2022-09-29T11:57:20.413Z",
-        "keyDescription": "apiKeyLearning"
+        "keyDescription": "api key description",
+        "expirationTime": 30
       }
     ],
     "conflictResolution": {

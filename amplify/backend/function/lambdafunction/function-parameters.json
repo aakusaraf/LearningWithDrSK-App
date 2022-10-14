@@ -1,21 +1,27 @@
 {
   "permissions": {
-    "api": {
-      "LearningwithDrSK": [
-        "Query",
-        "Mutation",
-        "Subscription"
-      ]
-    },
     "auth": {
-      "learningwithdrskae20dc05": [
+      "learningapp15bdda75": [
         "create",
         "read",
         "update",
         "delete"
       ]
     },
+    "api": {
+      "learningapp": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
     "storage": {
+      "s3learningappstoragebad1b9ed": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
       "CourseDetail:@model(appsync)": [
         "create",
         "read",

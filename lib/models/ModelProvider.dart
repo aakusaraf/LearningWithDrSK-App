@@ -34,7 +34,7 @@ export 'Videos.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "9e0bf6e1b4176763433b583732cd89c8";
+  String version = "1fdc9745d3ab418dc7b4adbc71678ecb";
   @override
   List<ModelSchema> modelSchemas = [Banner.schema, Categories.schema, CourseDetail.schema, Users.schema, Videos.schema];
   static final ModelProvider _instance = ModelProvider();

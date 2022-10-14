@@ -34,9 +34,9 @@ class CourseDetail extends Model {
   final String? _description;
   final double? _rating;
   final String? _outline;
-  final TemporalTime? _duration;
-  final String? _videoId;
+  final String? _icon;
   final List<Videos>? _VideosCoursedetail;
+  final String? _categoriesID;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -64,16 +64,25 @@ class CourseDetail extends Model {
     return _outline;
   }
   
-  TemporalTime? get duration {
-    return _duration;
-  }
-  
-  String? get videoId {
-    return _videoId;
+  String? get icon {
+    return _icon;
   }
   
   List<Videos>? get VideosCoursedetail {
     return _VideosCoursedetail;
+  }
+  
+  String get categoriesID {
+    try {
+      return _categoriesID!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   TemporalDateTime? get createdAt {
@@ -84,18 +93,18 @@ class CourseDetail extends Model {
     return _updatedAt;
   }
   
-  const CourseDetail._internal({required this.id, courseName, description, rating, outline, duration, videoId, VideosCoursedetail, createdAt, updatedAt}): _courseName = courseName, _description = description, _rating = rating, _outline = outline, _duration = duration, _videoId = videoId, _VideosCoursedetail = VideosCoursedetail, _createdAt = createdAt, _updatedAt = updatedAt;
+  const CourseDetail._internal({required this.id, courseName, description, rating, outline, icon, VideosCoursedetail, required categoriesID, createdAt, updatedAt}): _courseName = courseName, _description = description, _rating = rating, _outline = outline, _icon = icon, _VideosCoursedetail = VideosCoursedetail, _categoriesID = categoriesID, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory CourseDetail({String? id, String? courseName, String? description, double? rating, String? outline, TemporalTime? duration, String? videoId, List<Videos>? VideosCoursedetail}) {
+  factory CourseDetail({String? id, String? courseName, String? description, double? rating, String? outline, String? icon, List<Videos>? VideosCoursedetail, required String categoriesID}) {
     return CourseDetail._internal(
       id: id == null ? UUID.getUUID() : id,
       courseName: courseName,
       description: description,
       rating: rating,
       outline: outline,
-      duration: duration,
-      videoId: videoId,
-      VideosCoursedetail: VideosCoursedetail != null ? List<Videos>.unmodifiable(VideosCoursedetail) : VideosCoursedetail);
+      icon: icon,
+      VideosCoursedetail: VideosCoursedetail != null ? List<Videos>.unmodifiable(VideosCoursedetail) : VideosCoursedetail,
+      categoriesID: categoriesID);
   }
   
   bool equals(Object other) {
@@ -111,9 +120,9 @@ class CourseDetail extends Model {
       _description == other._description &&
       _rating == other._rating &&
       _outline == other._outline &&
-      _duration == other._duration &&
-      _videoId == other._videoId &&
-      DeepCollectionEquality().equals(_VideosCoursedetail, other._VideosCoursedetail);
+      _icon == other._icon &&
+      DeepCollectionEquality().equals(_VideosCoursedetail, other._VideosCoursedetail) &&
+      _categoriesID == other._categoriesID;
   }
   
   @override
@@ -129,8 +138,8 @@ class CourseDetail extends Model {
     buffer.write("description=" + "$_description" + ", ");
     buffer.write("rating=" + (_rating != null ? _rating!.toString() : "null") + ", ");
     buffer.write("outline=" + "$_outline" + ", ");
-    buffer.write("duration=" + (_duration != null ? _duration!.format() : "null") + ", ");
-    buffer.write("videoId=" + "$_videoId" + ", ");
+    buffer.write("icon=" + "$_icon" + ", ");
+    buffer.write("categoriesID=" + "$_categoriesID" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -138,16 +147,16 @@ class CourseDetail extends Model {
     return buffer.toString();
   }
   
-  CourseDetail copyWith({String? id, String? courseName, String? description, double? rating, String? outline, TemporalTime? duration, String? videoId, List<Videos>? VideosCoursedetail}) {
+  CourseDetail copyWith({String? id, String? courseName, String? description, double? rating, String? outline, String? icon, List<Videos>? VideosCoursedetail, String? categoriesID}) {
     return CourseDetail._internal(
       id: id ?? this.id,
       courseName: courseName ?? this.courseName,
       description: description ?? this.description,
       rating: rating ?? this.rating,
       outline: outline ?? this.outline,
-      duration: duration ?? this.duration,
-      videoId: videoId ?? this.videoId,
-      VideosCoursedetail: VideosCoursedetail ?? this.VideosCoursedetail);
+      icon: icon ?? this.icon,
+      VideosCoursedetail: VideosCoursedetail ?? this.VideosCoursedetail,
+      categoriesID: categoriesID ?? this.categoriesID);
   }
   
   CourseDetail.fromJson(Map<String, dynamic> json)  
@@ -156,19 +165,19 @@ class CourseDetail extends Model {
       _description = json['description'],
       _rating = (json['rating'] as num?)?.toDouble(),
       _outline = json['outline'],
-      _duration = json['duration'] != null ? TemporalTime.fromString(json['duration']) : null,
-      _videoId = json['videoId'],
+      _icon = json['icon'],
       _VideosCoursedetail = json['VideosCoursedetail'] is List
         ? (json['VideosCoursedetail'] as List)
           .where((e) => e?['serializedData'] != null)
           .map((e) => Videos.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
+      _categoriesID = json['categoriesID'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'courseName': _courseName, 'description': _description, 'rating': _rating, 'outline': _outline, 'duration': _duration?.format(), 'videoId': _videoId, 'VideosCoursedetail': _VideosCoursedetail?.map((Videos? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'courseName': _courseName, 'description': _description, 'rating': _rating, 'outline': _outline, 'icon': _icon, 'VideosCoursedetail': _VideosCoursedetail?.map((Videos? e) => e?.toJson()).toList(), 'categoriesID': _categoriesID, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
@@ -176,11 +185,11 @@ class CourseDetail extends Model {
   static final QueryField DESCRIPTION = QueryField(fieldName: "description");
   static final QueryField RATING = QueryField(fieldName: "rating");
   static final QueryField OUTLINE = QueryField(fieldName: "outline");
-  static final QueryField DURATION = QueryField(fieldName: "duration");
-  static final QueryField VIDEOID = QueryField(fieldName: "videoId");
+  static final QueryField ICON = QueryField(fieldName: "icon");
   static final QueryField VIDEOSCOURSEDETAIL = QueryField(
     fieldName: "VideosCoursedetail",
     fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: (Videos).toString()));
+  static final QueryField CATEGORIESID = QueryField(fieldName: "categoriesID");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "CourseDetail";
     modelSchemaDefinition.pluralName = "CourseDetails";
@@ -193,7 +202,30 @@ class CourseDetail extends Model {
           ModelOperation.UPDATE,
           ModelOperation.DELETE,
           ModelOperation.READ
+        ]),
+      AuthRule(
+        authStrategy: AuthStrategy.OWNER,
+        ownerField: "owner",
+        identityClaim: "cognito:username",
+        provider: AuthRuleProvider.USERPOOLS,
+        operations: [
+          ModelOperation.CREATE,
+          ModelOperation.UPDATE,
+          ModelOperation.DELETE,
+          ModelOperation.READ
+        ]),
+      AuthRule(
+        authStrategy: AuthStrategy.PRIVATE,
+        operations: [
+          ModelOperation.CREATE,
+          ModelOperation.UPDATE,
+          ModelOperation.DELETE,
+          ModelOperation.READ
         ])
+    ];
+    
+    modelSchemaDefinition.indexes = [
+      ModelIndex(fields: const ["categoriesID"], name: "byCategories")
     ];
     
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
@@ -223,13 +255,7 @@ class CourseDetail extends Model {
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: CourseDetail.DURATION,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.time)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: CourseDetail.VIDEOID,
+      key: CourseDetail.ICON,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -239,6 +265,12 @@ class CourseDetail extends Model {
       isRequired: false,
       ofModelName: (Videos).toString(),
       associatedKey: Videos.COURSEDETAILID
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: CourseDetail.CATEGORIESID,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
