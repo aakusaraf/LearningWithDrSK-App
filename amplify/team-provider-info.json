@@ -21,11 +21,17 @@
       "function": {
         "lambdafunction": {
           "deploymentBucketName": "amplify-learningapp-staging-135139-deployment",
-          "s3Key": "amplify-builds/lambdafunction-4849776e576b564a4d76-build.zip"
+          "s3Key": "amplify-builds/lambdafunction-324e7036714370693673-build.zip"
         },
         "learningapp3943e2fd": {
           "deploymentBucketName": "amplify-learningapp-staging-135139-deployment",
           "s3Key": "amplify-builds/learningapp3943e2fd-7237495677446c4c7978-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d17gxivzegvntr",
+          "type": "manual"
         }
       }
     }

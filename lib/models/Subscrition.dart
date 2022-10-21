@@ -23,15 +23,15 @@ import 'package:amplify_core/amplify_core.dart';
 import 'package:flutter/foundation.dart';
 
 
-/** This is an auto generated class representing the Users type in your schema. */
+/** This is an auto generated class representing the Subscrition type in your schema. */
 @immutable
-class Users extends Model {
-  static const classType = const _UsersModelType();
+class Subscrition extends Model {
+  static const classType = const _SubscritionModelType();
   final String id;
-  final String? _userName;
-  final String? _email;
-  final String? _mobile;
-  final String? _image;
+  final String? _subscritionName;
+  final String? _subDescription;
+  final String? _amount;
+  final String? _validity;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -43,38 +43,20 @@ class Users extends Model {
     return id;
   }
   
-  String get userName {
-    try {
-      return _userName!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  String? get subscritionName {
+    return _subscritionName;
   }
   
-  String get email {
-    try {
-      return _email!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  String? get subDescription {
+    return _subDescription;
   }
   
-  String? get mobile {
-    return _mobile;
+  String? get amount {
+    return _amount;
   }
   
-  String? get image {
-    return _image;
+  String? get validity {
+    return _validity;
   }
   
   TemporalDateTime? get createdAt {
@@ -85,15 +67,15 @@ class Users extends Model {
     return _updatedAt;
   }
   
-  const Users._internal({required this.id, required userName, required email, mobile, image, createdAt, updatedAt}): _userName = userName, _email = email, _mobile = mobile, _image = image, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Subscrition._internal({required this.id, subscritionName, subDescription, amount, validity, createdAt, updatedAt}): _subscritionName = subscritionName, _subDescription = subDescription, _amount = amount, _validity = validity, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Users({String? id, required String userName, required String email, String? mobile, String? image}) {
-    return Users._internal(
+  factory Subscrition({String? id, String? subscritionName, String? subDescription, String? amount, String? validity}) {
+    return Subscrition._internal(
       id: id == null ? UUID.getUUID() : id,
-      userName: userName,
-      email: email,
-      mobile: mobile,
-      image: image);
+      subscritionName: subscritionName,
+      subDescription: subDescription,
+      amount: amount,
+      validity: validity);
   }
   
   bool equals(Object other) {
@@ -103,12 +85,12 @@ class Users extends Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Users &&
+    return other is Subscrition &&
       id == other.id &&
-      _userName == other._userName &&
-      _email == other._email &&
-      _mobile == other._mobile &&
-      _image == other._image;
+      _subscritionName == other._subscritionName &&
+      _subDescription == other._subDescription &&
+      _amount == other._amount &&
+      _validity == other._validity;
   }
   
   @override
@@ -118,12 +100,12 @@ class Users extends Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("Users {");
+    buffer.write("Subscrition {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("userName=" + "$_userName" + ", ");
-    buffer.write("email=" + "$_email" + ", ");
-    buffer.write("mobile=" + "$_mobile" + ", ");
-    buffer.write("image=" + "$_image" + ", ");
+    buffer.write("subscritionName=" + "$_subscritionName" + ", ");
+    buffer.write("subDescription=" + "$_subDescription" + ", ");
+    buffer.write("amount=" + "$_amount" + ", ");
+    buffer.write("validity=" + "$_validity" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -131,59 +113,40 @@ class Users extends Model {
     return buffer.toString();
   }
   
-  Users copyWith({String? id, String? userName, String? email, String? mobile, String? image}) {
-    return Users._internal(
+  Subscrition copyWith({String? id, String? subscritionName, String? subDescription, String? amount, String? validity}) {
+    return Subscrition._internal(
       id: id ?? this.id,
-      userName: userName ?? this.userName,
-      email: email ?? this.email,
-      mobile: mobile ?? this.mobile,
-      image: image ?? this.image);
+      subscritionName: subscritionName ?? this.subscritionName,
+      subDescription: subDescription ?? this.subDescription,
+      amount: amount ?? this.amount,
+      validity: validity ?? this.validity);
   }
   
-  Users.fromJson(Map<String, dynamic> json)  
+  Subscrition.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _userName = json['userName'],
-      _email = json['email'],
-      _mobile = json['mobile'],
-      _image = json['image'],
+      _subscritionName = json['subscritionName'],
+      _subDescription = json['subDescription'],
+      _amount = json['amount'],
+      _validity = json['validity'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'userName': _userName, 'email': _email, 'mobile': _mobile, 'image': _image, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'subscritionName': _subscritionName, 'subDescription': _subDescription, 'amount': _amount, 'validity': _validity, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField USERNAME = QueryField(fieldName: "userName");
-  static final QueryField EMAIL = QueryField(fieldName: "email");
-  static final QueryField MOBILE = QueryField(fieldName: "mobile");
-  static final QueryField IMAGE = QueryField(fieldName: "image");
+  static final QueryField SUBSCRITIONNAME = QueryField(fieldName: "subscritionName");
+  static final QueryField SUBDESCRIPTION = QueryField(fieldName: "subDescription");
+  static final QueryField AMOUNT = QueryField(fieldName: "amount");
+  static final QueryField VALIDITY = QueryField(fieldName: "validity");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "Users";
-    modelSchemaDefinition.pluralName = "Users";
+    modelSchemaDefinition.name = "Subscrition";
+    modelSchemaDefinition.pluralName = "Subscritions";
     
     modelSchemaDefinition.authRules = [
       AuthRule(
-        authStrategy: AuthStrategy.OWNER,
-        ownerField: "owner",
-        identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
-        ]),
-      AuthRule(
         authStrategy: AuthStrategy.PRIVATE,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
-        ]),
-      AuthRule(
-        authStrategy: AuthStrategy.PUBLIC,
         operations: [
           ModelOperation.CREATE,
           ModelOperation.UPDATE,
@@ -195,25 +158,25 @@ class Users extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.USERNAME,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.EMAIL,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.MOBILE,
+      key: Subscrition.SUBSCRITIONNAME,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Users.IMAGE,
+      key: Subscrition.SUBDESCRIPTION,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Subscrition.AMOUNT,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Subscrition.VALIDITY,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -234,11 +197,11 @@ class Users extends Model {
   });
 }
 
-class _UsersModelType extends ModelType<Users> {
-  const _UsersModelType();
+class _SubscritionModelType extends ModelType<Subscrition> {
+  const _SubscritionModelType();
   
   @override
-  Users fromJson(Map<String, dynamic> jsonData) {
-    return Users.fromJson(jsonData);
+  Subscrition fromJson(Map<String, dynamic> jsonData) {
+    return Subscrition.fromJson(jsonData);
   }
 }

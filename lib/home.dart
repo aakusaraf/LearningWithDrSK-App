@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning/profile.dart';
+// import 'package:learning/profile.dart';
 import 'package:learning/userProfile.dart';
 
 class MyDemoApp extends StatelessWidget {
@@ -65,7 +65,7 @@ class MyHomePage extends StatelessWidget {
                 title: const Text('Profile'),
                 onTap: () {
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MyUserProfileApp()));
+                  MaterialPageRoute(builder: (context) => const MyUserProfileApp()));
                 },
               ),
               ListTile(
@@ -93,12 +93,12 @@ class MyHomePage extends StatelessWidget {
                 icon: Icon(
                   Icons.info,
                 ),
-                child: Text('App Info'),
                 applicationIcon: Icon(
                   Icons.local_play,
                 ),
-                applicationName: 'Learing with Dr.SK Srivastava',
+                applicationName: 'Learning with Dr.SK Srivastava',
                 applicationVersion: '1.0.0',
+                child: Text('App Info'),
               ),
             ],
           ),

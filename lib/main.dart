@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:learning/userProfile.dart';
 // import 'package:path/path.dart';
 import 'amplifyconfiguration.dart';
+import 'categories.dart';
 import 'models/ModelProvider.dart';
 
 
@@ -158,7 +159,8 @@ class MyMaterialApp extends StatelessWidget {
                 ),
                 title: const Text('Categories'),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const MyCategoryApp()));
                 },
               ),
 

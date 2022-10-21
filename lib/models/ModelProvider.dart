@@ -23,20 +23,22 @@ import 'package:amplify_core/amplify_core.dart';
 import 'Banner.dart';
 import 'Categories.dart';
 import 'CourseDetail.dart';
+import 'Subscrition.dart';
 import 'Users.dart';
 import 'Videos.dart';
 
 export 'Banner.dart';
 export 'Categories.dart';
 export 'CourseDetail.dart';
+export 'Subscrition.dart';
 export 'Users.dart';
 export 'Videos.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "1fdc9745d3ab418dc7b4adbc71678ecb";
+  String version = "4b0da97111bc2c51d12805fa500d0d63";
   @override
-  List<ModelSchema> modelSchemas = [Banner.schema, Categories.schema, CourseDetail.schema, Users.schema, Videos.schema];
+  List<ModelSchema> modelSchemas = [Banner.schema, Categories.schema, CourseDetail.schema, Subscrition.schema, Users.schema, Videos.schema];
   static final ModelProvider _instance = ModelProvider();
   @override
   List<ModelSchema> customTypeSchemas = [];
@@ -51,6 +53,8 @@ class ModelProvider implements ModelProviderInterface {
         return Categories.classType;
       case "CourseDetail":
         return CourseDetail.classType;
+      case "Subscrition":
+        return Subscrition.classType;
       case "Users":
         return Users.classType;
       case "Videos":

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:learning/home.dart';
-import 'package:learning/image.dart';
-import 'package:learning/login.dart';
+// import 'package:learning/home.dart';
+// import 'package:learning/image.dart';
+// import 'package:learning/login.dart';
 import 'package:learning/userProfile.dart';
-import 'package:path/path.dart';
-import 'package:camera/camera.dart';
+// import 'package:path/path.dart';
+// import 'package:camera/camera.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:learning/image_input.dart';
+// import 'dart:io';
+// import 'package:learning/image_input.dart';
 
 class MyProfileApp extends StatefulWidget {
+  const MyProfileApp({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
@@ -22,7 +25,7 @@ class _MyAppState extends State<MyProfileApp> {
   List<XFile>? _imageFileList;
 
   void _setImageFileListFromFile(XFile? value) {
-    _imageFileList = value == null ? null : <XFile>[value];
+    // _imageFileList = value == null ? null : <XFile>[value];
   }
 
   @override
@@ -52,7 +55,7 @@ class _MyAppState extends State<MyProfileApp> {
             onPressed: () {
               //statements
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MyUserProfileApp()));
+                  MaterialPageRoute(builder: (context) => const MyUserProfileApp()));
             },
           ),
           title: const Center(child: Text('Profile Page')),

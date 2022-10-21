@@ -2,7 +2,7 @@ import 'package:amplify_api/model_queries.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:learning/main.dart';
-import 'package:learning/home.dart';
+// import 'package:learning/home.dart';
 // import 'dart:io';
 // import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:learning/models/Users.dart';
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyUserProfileApp> {
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyProfileApp()));
+                      MaterialPageRoute(builder: (context) => const MyProfileApp()));
                 },
                 child: const Text('Edit'),
               )
@@ -56,28 +56,19 @@ class _MyAppState extends State<MyUserProfileApp> {
               final name = snapshot.data?.userName;
               final email= snapshot.data?.email;
               final mobile= snapshot.data?.mobile;
+              final image= snapshot.data?.image;
               if(snapshot.hasData) {
                 return Card(
                     child: Center(
                       child: Text(
-                      '$name  $email  $mobile',
-                      // '$email',
-                      style: TextStyle(fontSize: 18),
+                      '$name \n$email \n$mobile \n$image',
+                      style: const TextStyle(fontSize: 18),
                     ),
                     )
                 );
-
-              //     Container(
-              //   child: Center(
-              //   child: Text(
-              //   '$data',
-              //   style: TextStyle(fontSize: 18),
-              // ),
-              // )
-              //   );
-
               } else {
-                return const CircularProgressIndicator();
+
+                return const Center(child: CircularProgressIndicator());
 
               }},
           ),
