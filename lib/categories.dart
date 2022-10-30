@@ -47,14 +47,14 @@ class _MyAppState extends State<MyCategoryApp> {
                    mCatName ??= "";
                    var mCatIcon = snapshot.data![index]?.icon;
                    mCatIcon ??= "";
-                   return Image.network(mCatIcon[index]);
-                   //   Card(
-                   //   color: Colors.grey,
-                   //   child: Center(
-                   //     child: Text(mCatName),
-                   //   ),
-                   // );
-                     //
+                   return Card(
+                     color: Colors.amber,
+                     child: Center(
+                       child: Text(mCatName),
+
+                     ),
+                   );
+                   // Image.network(mCatIcon[index]);
 
                  }
              );

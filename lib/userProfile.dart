@@ -58,14 +58,59 @@ class _MyAppState extends State<MyUserProfileApp> {
               final mobile= snapshot.data?.mobile;
               final image= snapshot.data?.image;
               if(snapshot.hasData) {
-                return Card(
-                    child: Center(
-                      child: Text(
-                      '$name \n$email \n$mobile \n$image',
-                      style: const TextStyle(fontSize: 18),
+                return
+                  Center(
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Card(
+                        child:SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: Center(
+                              child: Text('$name',
+                                style: const TextStyle(fontSize: 18),
+                                ),
+                             )
+                          ),
+                        ),
+                        Card(
+                          child:SizedBox(
+                              width: 350,
+                              height: 50,
+                              child: Center(
+                                child: Text('$email',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              )
+                          ),
+                        ),
+                        Card(
+                          child:SizedBox(
+                              width: 350,
+                              height: 50,
+                              child: Center(
+                                child: Text('$mobile',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              )
+                          ),
+                        ),
+                        Card(
+                          child:SizedBox(
+                              width: 350,
+                              height: 50,
+                              child: Center(
+                                child: Text('$image',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              )
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
                     ),
-                    )
-                );
+                  );
               } else {
 
                 return const Center(child: CircularProgressIndicator());
